@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "950777736871",
+    "project_id": "nongsanapp-fda5b",
+    "storage_bucket": "nongsanapp-fda5b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950777736871:android:66f2fd85d67fd7609b7582",
+        "android_client_info": {
+          "package_name": "com.nhom07.nongsanapp2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6JnyljMs9KAMBupEJw1KibrMr9cUwdVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

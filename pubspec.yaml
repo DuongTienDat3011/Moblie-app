@@ -1,0 +1,51 @@
+name: nongsanapp2
+description: Ứng dụng Điều phối và Tiêu thụ Nông sản Trực tiếp
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ── Firebase (Auth + Firestore — miễn phí hoàn toàn) ─────────────────
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.4.4
+  # firebase_storage: KHÔNG dùng — yêu cầu Blaze plan (trả phí)
+  # Thay bằng Cloudinary (miễn phí)
+
+  # ── Cloudinary — upload ảnh miễn phí ─────────────────────────────────
+  http: ^1.2.2          # gọi Cloudinary REST API
+  image_picker: ^1.1.2  # chọn ảnh từ gallery/camera
+
+  # ── State Management ─────────────────────────────────────────────────
+  flutter_riverpod: ^2.5.1
+
+  # ── Navigation ───────────────────────────────────────────────────────
+  go_router: ^14.6.1
+
+  # ── UI ───────────────────────────────────────────────────────────────
+  cached_network_image: ^3.4.1
+  flutter_rating_bar: ^4.0.1
+
+  # ── Utils ────────────────────────────────────────────────────────────
+  intl: ^0.19.0
+  uuid: ^4.5.1
+  shared_preferences: ^2.3.2
+  logger: ^2.4.0
+  dartz: ^0.10.1
+  url_launcher: ^6.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icons/
