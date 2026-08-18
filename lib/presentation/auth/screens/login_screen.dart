@@ -96,10 +96,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       if (next.success) {
         // Navigate theo role thực từ Firestore
         WidgetsBinding.instance.addPostFrameCallback((_) async {
-          ref.invalidate(currentUserProvider);
-          await Future.delayed(const Duration(milliseconds: 500));
           if (!mounted) return;
-          final user = ref.read(currentUserProvider).value;
+          // Invalidate để force reload
+          ref.invalidate(currentUserProvider);
+          // Đợi FutureProvider fetch xong từ Firestore
+          final user = await ref.read(currentUserProvider.future);
+          if (!mounted) return;
           if (user != null && user.role.name == 'htx') {
             context.go('/htx');
           } else {
