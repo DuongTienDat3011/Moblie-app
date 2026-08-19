@@ -287,7 +287,7 @@ class _State extends ConsumerState<BuyerSearchScreen> {
                     ),
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2, crossAxisSpacing: 10,
-                      mainAxisSpacing: 10, childAspectRatio: 0.62,
+                      mainAxisSpacing: 10, childAspectRatio: 0.78,
                     ),
                   ),
                 ),
