@@ -116,7 +116,7 @@ class _TrackingBody extends StatelessWidget {
             _InfoRow(
               icon: Icons.payments_rounded,
               label: 'Tổng tiền',
-              value: formatCurrency(order.grandTotal)),
+              value: formatMoney(order.grandTotal)),
           ]),
           const SizedBox(height: 24),
         ],
@@ -245,9 +245,6 @@ class _StatusBanner extends StatelessWidget {
       case OrderStatus.cancelled:
         return (AppColors.red, const Color(0xFFFEF2F2),
             Icons.cancel_rounded, 'Đơn hàng đã huỷ');
-      default:
-        return (AppColors.textSecondary, AppColors.background,
-            Icons.info_outline_rounded, s.label);
     }
   }
 }
