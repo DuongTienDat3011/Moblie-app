@@ -199,7 +199,7 @@ class BuyerHomeScreen extends ConsumerWidget {
                         color: AppColors.primaryGreen))),
                 error: (_, __) => const SizedBox.shrink(),
                 data: (lots) => SizedBox(
-                  height: 280,
+                  height: 258,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: lots.length,

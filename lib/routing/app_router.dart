@@ -10,6 +10,7 @@ import '../presentation/auth/screens/splash_screen.dart';
 import '../presentation/buyer/screens/buyer_lot_detail_screen.dart';
 import '../presentation/buyer/screens/buyer_place_order_screen.dart';
 import '../presentation/buyer/screens/buyer_shell.dart';
+import '../presentation/buyer/screens/buyer_tracking_screen.dart';
 import '../presentation/htx/screens/htx_create_lot_screen.dart';
 import '../presentation/htx/screens/htx_order_detail_screen.dart';
 import '../presentation/htx/screens/htx_shell.dart';
@@ -141,6 +142,12 @@ final routerProvider = Provider<GoRouter>((ref) {
             path: 'order/:id',
             builder: (_, s) =>
                 BuyerLotDetailScreen(lotId: s.pathParameters['id']!),
+          ),
+          // Theo dõi vận chuyển
+          GoRoute(
+            path: 'tracking/:id',
+            builder: (_, s) =>
+                BuyerTrackingScreen(orderId: s.pathParameters['id']!),
           ),
         ],
       ),

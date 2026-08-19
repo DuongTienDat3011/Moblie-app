@@ -9,8 +9,6 @@ import 'app_badge.dart';
 class LotCard extends StatelessWidget {
   final LotModel lot;
   final VoidCallback onTap;
-  /// wide = true → chiều ngang full (dùng trong grid)
-  /// wide = false → width cố định 196px (dùng trong horizontal scroll)
   final bool wide;
 
   const LotCard({
@@ -29,7 +27,7 @@ class LotCard extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
         child: Container(
-          width: wide ? null : 196,
+          width: wide ? null : 180,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: const Color(0xCCE5E7EB)),
@@ -42,10 +40,10 @@ class LotCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              // ── Ảnh ────────────────────────────────────────────────────
+              // ── Ảnh ──────────────────────────────────────────────────
               Stack(children: [
                 AspectRatio(
-                  aspectRatio: wide ? 16 / 9 : 1,
+                  aspectRatio: 1,
                   child: ClipRRect(
                     borderRadius: const BorderRadius.vertical(
                         top: Radius.circular(16)),
@@ -72,7 +70,6 @@ class LotCard extends StatelessWidget {
                           color: Colors.white, fontSize: 10,
                           fontWeight: FontWeight.bold)),
                     )),
-                // Nút yêu thích
                 Positioned(
                   top: 6, right: 6,
                   child: Container(
@@ -88,34 +85,30 @@ class LotCard extends StatelessWidget {
                   )),
               ]),
 
-              // ── Info ────────────────────────────────────────────────────
+              // ── Info ─────────────────────────────────────────────────
               Padding(
-                padding: const EdgeInsets.fromLTRB(10, 9, 10, 10),
+                padding: const EdgeInsets.fromLTRB(10, 8, 10, 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Tên sản phẩm
                     Text(lot.name,
                       style: const TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.w600),
-                      maxLines: 2,
+                          fontSize: 13, fontWeight: FontWeight.w600),
+                      maxLines: 1,
                       overflow: TextOverflow.ellipsis),
-                    const SizedBox(height: 3),
-
-                    // Seller + icon xác minh
+                    const SizedBox(height: 2),
                     Row(children: [
                       Expanded(child: Text(lot.sellerName,
                         style: const TextStyle(
-                            fontSize: 11.5, color: AppColors.textSecondary),
+                            fontSize: 11, color: AppColors.textSecondary),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis)),
-                      const Icon(Icons.verified_outlined, size: 12,
+                      const Icon(Icons.verified_outlined, size: 11,
                           color: AppColors.primaryGreen),
                     ]),
-                    const SizedBox(height: 6),
-
-                    // Giá — dùng Flexible để tránh overflow
+                    const SizedBox(height: 5),
+                    // Giá
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.baseline,
                       textBaseline: TextBaseline.alphabetic,
@@ -123,16 +116,16 @@ class LotCard extends StatelessWidget {
                         Flexible(child: Text(
                           formatPerKg(lot.pricePerKg),
                           style: const TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w700,
+                              fontSize: 14, fontWeight: FontWeight.w700,
                               color: AppColors.darkGreen),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1)),
                         if (lot.oldPricePerKg != null) ...[
-                          const SizedBox(width: 5),
+                          const SizedBox(width: 4),
                           Flexible(child: Text(
-                            '${lot.oldPricePerKg!.toStringAsFixed(0)} ₫',
+                            '${lot.oldPricePerKg!.toStringAsFixed(0)}₫',
                             style: const TextStyle(
-                                fontSize: 11,
+                                fontSize: 10,
                                 color: AppColors.textHint,
                                 decoration: TextDecoration.lineThrough),
                             overflow: TextOverflow.ellipsis,
@@ -141,33 +134,15 @@ class LotCard extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 3),
-
-                    // Số lượng — maxLines + ellipsis
                     Text(
-                      'Còn ${formatQty(lot.remainKg)} · tối thiểu ${formatQty(lot.moqKg)}',
+                      'Còn ${formatQty(lot.remainKg)}',
                       style: const TextStyle(
-                          fontSize: 11.5, color: AppColors.textSecondary),
+                          fontSize: 11, color: AppColors.textSecondary),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis),
-                    const SizedBox(height: 3),
-
-                    // Ngày sẵn hàng
-                    Text('Sẵn sàng ${lot.readyDate}',
-                      style: const TextStyle(
-                          fontSize: 11.5, color: AppColors.textSecondary),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis),
-                    const SizedBox(height: 6),
-
-                    // Badges — giới hạn 2 cert để tránh card cao quá
-                    Wrap(
-                      spacing: 4, runSpacing: 4,
-                      children: [
-                        AppBadge(lot.province, tone: 'gray'),
-                        ...lot.certs.take(2)
-                            .map((c) => AppBadge(c, tone: 'green')),
-                      ],
-                    ),
+                    // Badge tỉnh — chỉ 1 badge để tránh overflow
+                    const SizedBox(height: 5),
+                    AppBadge(lot.province, tone: 'gray'),
                   ],
                 ),
               ),

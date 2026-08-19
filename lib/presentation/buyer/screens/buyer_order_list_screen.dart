@@ -90,6 +90,10 @@ class _OrderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final canTrack = order.status.name == 'inTransit' ||
+        order.status.name == 'confirmed' ||
+        order.status.name == 'waitingShip';
+
     return AppCard(
       onTap: () => context.push('/buyer/order/${order.id}'),
       padding: const EdgeInsets.all(14),
@@ -115,7 +119,23 @@ class _OrderCard extends StatelessWidget {
             style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700,
                 color: AppColors.darkGreen)),
           const Spacer(),
-          const Icon(Icons.chevron_right_rounded, color: AppColors.textHint),
+          // Nút theo dõi vận chuyển
+          if (canTrack)
+            TextButton.icon(
+              onPressed: () => context.push('/buyer/tracking/${order.id}'),
+              style: TextButton.styleFrom(
+                foregroundColor: AppColors.primaryGreen,
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                textStyle: const TextStyle(fontSize: 12.5,
+                    fontWeight: FontWeight.w600),
+              ),
+              icon: const Icon(Icons.local_shipping_rounded, size: 15),
+              label: const Text('Theo dõi'),
+            )
+          else
+            const Icon(Icons.chevron_right_rounded, color: AppColors.textHint),
         ]),
       ]),
     );
